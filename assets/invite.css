@@ -1,0 +1,152 @@
+:root{
+  --cream:#FBF6F4; --rose:#B5838D; --rosegold:#D4A59A; --mauve:#6D4C5E; --ink:#3B2A33;
+  --peach:#F6C99A; --blush:#E8C4C4; --plum:#3D2B3D;
+  --frame-w:min(100vw,480px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;height:100%;overflow:hidden;}
+body{
+  font-family:'Cormorant Garamond',serif;color:var(--ink);
+  background:radial-gradient(circle at 50% 30%,#5a4152,#2a1d27);
+}
+a{color:inherit;}
+
+/* Phone-width frame; full screen on mobile, centred column on larger screens. */
+.frame{position:relative;width:var(--frame-w);height:100vh;height:100dvh;margin:0 auto;overflow:hidden;background:var(--cream);box-shadow:0 0 80px #0006;}
+
+/* ── Pages: one full screen each, snapping one at a time ── */
+.pages{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none;}
+.pages::-webkit-scrollbar{display:none;}
+.page{
+  position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:max(56px,env(safe-area-inset-top)) 28px max(40px,env(safe-area-inset-bottom));
+  gap:clamp(6px,1.4dvh,14px);
+}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 110ms);}
+.page.active .rv{opacity:1;transform:none;}
+
+/* Shared type */
+.label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--rose);}
+.script{font-family:'Great Vibes',cursive;font-weight:400;line-height:1.05;margin:0;}
+.title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(40px,11vw,54px);line-height:1;margin:0;color:var(--mauve);}
+.deva{font-family:'Tiro Devanagari Hindi',serif;font-size:14px;opacity:.6;letter-spacing:.05em;}
+.copy{font-size:clamp(18px,4.8vw,21px);line-height:1.5;max-width:330px;margin:0;opacity:.85;}
+.rule{display:flex;align-items:center;gap:10px;color:var(--rosegold);font-size:12px;}
+.rule::before,.rule::after{content:'';width:48px;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent);}
+
+.arch{height:clamp(200px,40dvh,400px);aspect-ratio:2/3;border-radius:999px 999px 14px 14px;overflow:hidden;border:2px solid #fff;outline:1px solid var(--rosegold);outline-offset:5px;box-shadow:0 20px 40px #6d4c5e2e;flex:none;}
+.arch img{width:100%;height:100%;object-fit:cover;display:block;}
+/* Crops the frame drawn into reception.png so only the art shows inside the arch. */
+.arch img.has-frame{transform:scale(1.12);}
+
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid currentColor;background:transparent;color:inherit;}
+.btn.solid{background:var(--mauve);border-color:var(--mauve);color:var(--cream);}
+.btn svg{width:14px;height:14px;flex:none;}
+.when{display:flex;align-items:center;gap:12px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;}
+.when i{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+
+/* Cover */
+.p-cover{background:radial-gradient(circle at 50% 18%,#fff 0,transparent 55%),linear-gradient(180deg,#FBF6F4,#F3E1E0);}
+.p-cover .names{display:flex;align-items:baseline;gap:12px;color:var(--mauve);}
+.p-cover .names .script{font-size:clamp(50px,14vw,68px);}
+.p-cover .names .amp{font-family:'Great Vibes',cursive;font-size:34px;color:var(--rosegold);}
+.om{font-family:'Tiro Devanagari Hindi',serif;color:var(--mauve);font-size:13px;}
+.swipe{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:.4em;color:var(--rose);text-transform:uppercase;animation:nudge 2s ease-in-out infinite;}
+.swipe svg{width:16px;height:16px;}
+@keyframes nudge{0%,100%{transform:translate(-50%,0);opacity:.6;}50%{transform:translate(-50%,-6px);opacity:1;}}
+
+/* Invitation */
+.p-invite{background:linear-gradient(180deg,#F3E1E0,#FBF6F4 45%,#F7EAE6);}
+.p-invite .script{font-size:clamp(46px,12vw,60px);color:var(--mauve);}
+.card{padding:22px 26px;border:1px solid #d4a59a80;border-radius:200px 200px 16px 16px;background:#fff8;max-width:300px;}
+.card .t{font-style:italic;font-size:21px;color:var(--mauve);}
+
+/* Haldi */
+.p-haldi{background:radial-gradient(circle at 50% 20%,#FFF6EA 0,transparent 60%),linear-gradient(180deg,#FDEBD6,var(--peach));color:#5B3A2E;}
+.p-haldi .label{color:#B5754A;}
+.p-haldi .title{color:#8A4E2E;}
+.p-haldi .arch{outline-color:#E2A36B;}
+.p-haldi .arch img{object-position:50% 15%;}
+.p-haldi .btn.solid{background:#B5754A;border-color:#B5754A;color:#FFF6EA;}
+
+/* Wedding */
+.p-wedding{background:radial-gradient(circle at 50% 20%,#FFF7F6 0,transparent 60%),linear-gradient(180deg,#FBEFEE,var(--blush));color:var(--ink);}
+.p-wedding .title{color:var(--mauve);}
+
+/* Reception */
+.p-reception{background:radial-gradient(circle at 50% 10%,#5C4260 0,var(--plum) 55%,#2A1D2B 100%);color:#F3E3E6;}
+.p-reception .label{color:var(--rosegold);}
+.p-reception .title{color:#F6DCD6;}
+.p-reception .arch{border-color:#F6DCD6;outline-color:var(--rosegold);box-shadow:0 20px 50px #0007;}
+.p-reception .btn.solid{background:var(--rosegold);border-color:var(--rosegold);color:var(--plum);}
+.stars{position:absolute;inset:0;pointer-events:none;background-image:
+  radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 78% 12%,#fffc 50%,transparent 51%),
+  radial-gradient(1.5px 1.5px at 88% 40%,#F6DCD6 50%,transparent 51%),radial-gradient(1px 1px at 8% 62%,#fffb 50%,transparent 51%),
+  radial-gradient(1px 1px at 30% 88%,#fffa 50%,transparent 51%),radial-gradient(1.5px 1.5px at 70% 80%,#F6DCD6 50%,transparent 51%),
+  radial-gradient(1px 1px at 50% 6%,#fff 50%,transparent 51%);animation:shimmer 4s ease-in-out infinite alternate;}
+@keyframes shimmer{from{opacity:.6;}to{opacity:1;}}
+
+/* Save the date */
+.p-date{background:linear-gradient(180deg,#F7EAE6,#FBF6F4 50%,#F3E1E0);}
+.cd-grid{display:flex;width:100%;max-width:340px;border-top:1px solid #d4a59a99;border-bottom:1px solid #d4a59a99;padding:18px 0;margin:6px 0;}
+.cd-cell{flex:1;position:relative;}
+.cd-cell + .cd-cell::before{content:'';position:absolute;left:0;top:12%;bottom:12%;width:1px;background:#d4a59a80;}
+.cd-num{font-weight:500;font-size:clamp(34px,10vw,44px);color:var(--mauve);line-height:1;font-variant-numeric:tabular-nums;}
+.cd-lbl{font-style:italic;font-size:13px;letter-spacing:.14em;color:var(--rose);margin-top:6px;}
+.cd-ended{flex:1;font-style:italic;font-size:22px;color:var(--mauve);}
+.p-date small{font-style:italic;font-size:15px;opacity:.65;}
+.mini-list{font-size:17px;line-height:1.7;opacity:.85;}
+.mini-list b{font-weight:600;color:var(--mauve);}
+
+/* RSVP */
+.p-rsvp{background:radial-gradient(circle at 50% 100%,#EBCFCF,transparent 60%),var(--cream);}
+.p-rsvp .script{font-size:clamp(46px,12vw,58px);color:var(--mauve);}
+.p-rsvp .tel{font-size:20px;letter-spacing:.06em;color:var(--mauve);}
+.p-rsvp .tel a{color:var(--rose);font-weight:600;text-decoration:none;}
+.p-rsvp .sign{margin-top:clamp(16px,4dvh,40px);}
+.p-rsvp .sign .script{font-size:40px;color:var(--rose);}
+
+/* ── Page dots ── */
+.dots{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px;}
+.dots button{width:8px;height:8px;padding:0;border-radius:50%;border:1px solid var(--rose);background:transparent;cursor:pointer;transition:all .3s;}
+.dots button.on{background:var(--rose);height:20px;border-radius:4px;}
+.frame.dark-page .dots button{border-color:var(--rosegold);}
+.frame.dark-page .dots button.on{background:var(--rosegold);}
+
+/* ── Music ── */
+.music{position:absolute;top:max(14px,env(safe-area-inset-top));left:14px;z-index:40;width:40px;height:40px;border-radius:50%;background:#fffc;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid #d4a59a99;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mauve);}
+.music .bars{display:none;gap:2px;align-items:center;height:14px;}
+.music.playing .bars{display:flex;}
+.music.playing .play{display:none;}
+.music .bar{width:2px;background:currentColor;border-radius:1px;animation:bars .9s ease-in-out infinite;}
+.music .bar:nth-child(1){animation-delay:-.9s;} .music .bar:nth-child(2){animation-delay:-.6s;} .music .bar:nth-child(3){animation-delay:-.3s;}
+@keyframes bars{0%,100%{height:4px;}50%{height:14px;}}
+
+/* ── Petals & sparkles ── */
+.petals,.glitter{position:absolute;inset:0;pointer-events:none;z-index:30;overflow:hidden;}
+.petal{position:absolute;top:-40px;opacity:0;animation:petal-fall linear infinite;}
+.petal svg{width:100%;height:100%;display:block;}
+@keyframes petal-fall{0%{transform:translateY(-5vh) rotate(0);opacity:0;}8%{opacity:.85;}50%{transform:translateY(55vh) translateX(36px) rotate(220deg);}100%{transform:translateY(110vh) translateX(-28px) rotate(520deg);opacity:0;}}
+.spark{position:absolute;width:6px;height:6px;opacity:0;animation:twinkle ease-in-out infinite;}
+.spark::before,.spark::after{content:'';position:absolute;background:var(--rosegold);}
+.spark::before{left:50%;top:0;width:1px;height:100%;box-shadow:0 0 4px var(--rosegold);}
+.spark::after{top:50%;left:0;height:1px;width:100%;box-shadow:0 0 4px var(--rosegold);}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.4);}50%{opacity:.9;transform:scale(1.1) rotate(45deg);}}
+
+.frame.entering .p-cover .arch{animation:push-in 2.2s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes push-in{from{transform:scale(1.2);filter:blur(4px);}to{transform:none;filter:none;}}
+
+/* Short phones */
+@media (max-height:680px){
+  .page{gap:6px;padding-top:48px;padding-bottom:30px;}
+  .arch{height:clamp(170px,34dvh,300px);}
+  .copy{font-size:17px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .petals,.glitter{display:none;}
+  .rv{opacity:1;transform:none;transition:none;}
+  .frame.entering .p-cover .arch,.swipe,.stars{animation:none;}
+}
